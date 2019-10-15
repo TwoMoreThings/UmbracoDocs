@@ -1,6 +1,5 @@
 ---
-versionFrom: 7.0.0
-needsV8Update: "true"
+versionFrom: 8.0.0
 ---
 
 # Creating forms
@@ -36,7 +35,7 @@ namespace MyFirstForm.Models
 Build your solution after adding the model.
 
 ### Creating the view
-Next, we add the view for the form to the `/View/Partials` folder. Because we've added the model and built the solution we can add it as a strongly typed view.
+Next, we add the view for the form to the `/View/Partials` folder. Because we've added the model and built the solution we can add it as a strongly typed view. Name the view 'ContactForm'
 
 The view can be built with standard MVC helpers:
 
@@ -58,7 +57,7 @@ The view can be built with standard MVC helpers:
 ```
 
 ### Adding the controller
-Finally, we're going to add the controller. Add a controller to the `/Controllers` folder, name it `ContactController` and make sure to use an __empty MVC controller__ as the template.
+Finally, we're going to add the controller. Add a controller to the `/Controllers` folder, name it `ContactFormController` and make sure to use an __empty MVC controller__ as the template.  Change the form to inherit from SurfaceController instead of Controller.
 
 ```csharp
 using MyFirstForm.Models;
@@ -87,6 +86,8 @@ namespace MyFirstForm.Controllers
 }
 ```
 
+Build your solution after adding the controller.
+
 If the model state is invalid, `CurrentUmbracoPage()` will send the user back to the form. If valid, you can work with the form data, e.g. sending an email to site admin and then `RedirectToCurrentUmbracoPage();`.
 
 ## Adding the form to a template
@@ -104,7 +105,7 @@ You can add the form to a template by rendering the partial view:
 To add the form to your site we'll make a macro. This also makes it possible to let editors add the form to a page using the rich text editor.
 
 #### Creating a macro
-Go to the developer section and right click the menu icon on the __Partial Views Macro Files__ node. Name the macro *Contact Form*, select an empty snippet and leave the __Create Macro__ checkbox checked.
+Go to the settings section and right click the menu icon on the __Partial Views Macro Files__ node in the Templating group and select 'New partial view macro'. Name the macro *Contact Form*.
 
 In the partial view, we're going to render our contact form using the view model we created earlier.
 
@@ -120,8 +121,11 @@ In the partial view, we're going to render our contact form using the view model
 
 
 #### Adding the macro
-The last thing to do before we can add the form to a page is to **allow the Macro in a rich text editor**.
-Select the expand the __Macros__ node and select the __Contact Form__ Macro. Check the boxes under __Editor Settings__.
+The last thing to do before we can add the form to a page is to **Use in a rich text editor and the grid**.
+
+**Note:** If you don't see the macro listed in the following step you should right-click the Macros folder and select 'Reload' from the context menu. This is a bug which exists in versions up to 8.20
+
+Select the expand the __Macros__ node and select the __Contact Form__ Macro. Check the box under __Editor Settings__.
 
 Now you can add the form to a page that has a rich text editor.
 
